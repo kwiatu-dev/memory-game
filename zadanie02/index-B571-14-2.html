@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .display{
+            position: absolute;
+            top: 100px;
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .mini{
+            box-sizing: border-box;
+            border: 1px solid deepskyblue;
+            top: 50px;
+            height: 100px;
+            width: 100px;
+        }
+
+        .mini img{
+            width: inherit;
+            height: inherit;
+        }
+    </style>
+</head>
+<body>
+    <!-- (div#a$.mini[onclick="show(this)" data-index="$"]>img[src="img/img$.png"])*4 -->
+    <button class="show" onclick="showAll()">Pokaż wszystkie</button>
+    <button class="hide" onclick="hide()">Zakryj</button>
+    <button class="random" onclick="random()">Losuj</button>
+
+    <div class="display">
+        <div id="a1" class="mini" onclick="show(this)" data-index="0"><img src="img/img6.png" alt=""></div>
+        <div id="a2" class="mini" onclick="show(this)" data-index="1"><img src="img/img2.png" alt=""></div>
+        <div id="a3" class="mini" onclick="show(this)" data-index="2"><img src="img/img3.png" alt=""></div>
+        <div id="a4" class="mini" onclick="show(this)" data-index="3"><img src="img/img4.png" alt=""></div>
+    </div>
+
+
+    <script>
+        const display = document.querySelector('.display');
+        const blocks = document.querySelectorAll('.mini');
+        const cloneBlocks = [...blocks].map(item => item.cloneNode(true));
+
+        const hide = () => blocks.forEach(item => item.firstChild.src = 'img/img1.png');
+
+        const showAll = () =>{
+            blocks.forEach((item, index) =>{
+                if(item.id === cloneBlocks[index].id){
+                    item.firstChild.src = cloneBlocks[index].firstChild.src;
+                }
+            })
+        }
+
+        const show = (item) =>{
+            item.firstChild.src = cloneBlocks[item.getAttribute('data-index')].firstChild.src;
+        }
+
+        const generateUniqueRandomNumbers = (range) => {
+            let arr = [];
+            let resoult = [];
+
+            for(let i = 0; i < range; i++){
+                arr.push(i);
+            }
+
+            for(let i = 1; i <= range; i++){
+                const random = Math.floor(Math.random() * (range - i));
+                resoult.push(arr[random]);
+                arr[random] = arr[range - i];
+            }
+
+            return resoult;
+        }
+
+        const random = () =>{
+            display.innerHTML = "";
+            const random = generateUniqueRandomNumbers(blocks.length);
+            
+            for(let item of random){
+                display.appendChild(blocks[item]);
+            }
+        }
+    </script>
+</body>
+</html>

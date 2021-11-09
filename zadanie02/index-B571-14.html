@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            position: absolute;
+        }
+
+        .mini{
+            border: 1px solid deepskyblue;
+            top: 50px;
+            height: 98px;
+            width: 98px;
+        }
+
+        .mini img{
+            width: 98px;
+            height: 98px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- (div#a$.mini[style="left: $00px;" onclick="showMe(this)"]>img[src="img/img$.png"])*4 -->
+    <button class="show" onclick="show()">pokaz</button>
+    <button class="hide" onclick="hide()">zakryj</button>
+
+    <div id="a1" class="mini" style="left: 100px;"><img src="img/img1.png" alt=""></div>
+    <div id="a2" class="mini" style="left: 200px;"><img src="img/img2.png" alt=""></div>
+    <div id="a3" class="mini" style="left: 100px; top: 150px;"><img src="img/img3.png" alt=""></div>
+    <div id="a4" class="mini" style="left: 200px; top: 150px;"><img src="img/img4.png" alt=""></div>
+
+    <script>
+        const blocks = document.querySelectorAll('.mini');
+
+        const hide = () => {
+
+        }
+    </script>
+</body>
+</html>
